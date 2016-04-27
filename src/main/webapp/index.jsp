@@ -56,7 +56,7 @@
                 <div class="content">
 
         <div class="cent" align="center">
-        <form action="/calc" method="get">
+        <form  method="get">
 
             <b>Базовый месяц :</b>
 

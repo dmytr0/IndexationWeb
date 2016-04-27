@@ -15,7 +15,7 @@ public class Solution {
     private HashMap<YearMonth, BigDecimal> indexes;
     private List<String> BasePerList;
     private List<String> CalcPerList;
-    private BigDecimal minzp;
+    private BigDecimal minzp = new BigDecimal("1378");
     private YearMonth startIndexesPeriod = YearMonth.of(2000, 01);
     private YearMonth endIndexesPeriod;
     private static final YearMonth startCalc = YearMonth.of(2016,1);
@@ -60,7 +60,6 @@ public class Solution {
             e.printStackTrace();
         }
 //        startIndexScheduler();
-        minzp = new BigDecimal(ReadProperties.getProperty("minimal_salary"));
         fillBasePeriod();
         try {
             fillCalcPeriod();
@@ -168,11 +167,11 @@ public class Solution {
         return indexes;
     }
 
-    public void setIndexes(HashMap<YearMonth, BigDecimal> indexes) {
+    void setIndexes(HashMap<YearMonth, BigDecimal> indexes) {
         this.indexes = indexes;
     }
 
-    public List<String> getBasePerList() {
+    List<String> getBasePerList() {
         return BasePerList;
     }
 
@@ -180,7 +179,7 @@ public class Solution {
         BasePerList = basePerList;
     }
 
-    public List<String> getCalcPerList() {
+    List<String> getCalcPerList() {
         return CalcPerList;
     }
 
@@ -188,7 +187,7 @@ public class Solution {
         CalcPerList = calcPerList;
     }
 
-    public BigDecimal getMinzp() {
+    BigDecimal getMinzp() {
         return minzp;
     }
 
@@ -196,15 +195,15 @@ public class Solution {
         this.minzp = minzp;
     }
 
-    public YearMonth getEndIndexesPeriod() {
+    private YearMonth getEndIndexesPeriod() {
         return endIndexesPeriod;
     }
 
-    public void setEndIndexesPeriod(YearMonth endIndexesPeriod) {
+    private void setEndIndexesPeriod(YearMonth endIndexesPeriod) {
         this.endIndexesPeriod = endIndexesPeriod;
     }
 
-    public YearMonth getStartIndexesPeriod() {
+    private YearMonth getStartIndexesPeriod() {
         return startIndexesPeriod;
     }
 
@@ -212,7 +211,7 @@ public class Solution {
         this.startIndexesPeriod = startIndexesPeriod;
     }
 
-    public static YearMonth getStartCalc() {
+    private static YearMonth getStartCalc() {
         return startCalc;
     }
 }

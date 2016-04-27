@@ -14,7 +14,7 @@ import java.util.HashMap;
 
 public class IndexDownloader {
 
-    private static   String indexUrl = "http://index.minfin.com.ua/index/infl/";
+    private static String indexUrl = "http://index.minfin.com.ua/index/infl/";
 
     public static HashMap<YearMonth, BigDecimal> getIdexes(){
         Document doc = null;
