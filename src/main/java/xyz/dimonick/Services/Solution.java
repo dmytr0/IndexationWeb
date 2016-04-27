@@ -9,16 +9,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
 
-public class Solution {
+class Solution {
 
     private static volatile Solution instance;
     private HashMap<YearMonth, BigDecimal> indexes;
     private List<String> BasePerList;
     private List<String> CalcPerList;
     private BigDecimal minzp = new BigDecimal("1378");
-    private YearMonth startIndexesPeriod = YearMonth.of(2000, 01);
+    private YearMonth startIndexesPeriod = YearMonth.parse("2000-01");
     private YearMonth endIndexesPeriod;
-    private static final YearMonth startCalc = YearMonth.of(2016,1);
+    private static final YearMonth startCalc = YearMonth.parse("2016-01");
     private BigDecimal newLimit = new BigDecimal("1.03");
     private BigDecimal oldLimit = new BigDecimal("1.01");
 
@@ -27,7 +27,7 @@ public class Solution {
 
 
 
-    public static Solution getInstance() {
+    static Solution getInstance() {
         Solution localInstance = instance;
         if (localInstance == null) {
             synchronized (Solution.class) {
@@ -45,14 +45,14 @@ public class Solution {
     }
 
     void startIndexScheduler(){
-        long day = 86400000l;
+        long day = 86400000;
         Timer time = new Timer();
         DownloadScheduler ds = new DownloadScheduler();
         time.schedule(ds, 0, day);
     }
 
 
-    public void init(){
+    private void init(){
         indexes = IndexDownloader.getIdexes();
         try {
             Thread.sleep(1000);
@@ -71,7 +71,7 @@ public class Solution {
 
     //fill avalible base period
 
-    public void fillBasePeriod()
+    private void fillBasePeriod()
     {
         BasePerList = new ArrayList<String>(indexes.size());
         YearMonth tmpPeriod = getStartIndexesPeriod();
@@ -84,7 +84,7 @@ public class Solution {
 
     // fill avalible calculation period
 
-    public void fillCalcPeriod() throws Exception {
+    private void fillCalcPeriod() throws Exception {
         YearMonth tmpPeriod;
         YearMonth maxAvalible = getEndIndexesPeriod().plusMonths(2);
         if (maxAvalible.compareTo(getStartCalc())<0) {
@@ -97,8 +97,8 @@ public class Solution {
             tmpPeriod = tmpPeriod.plusMonths(1);
         }
         CalcPerList = new ArrayList<String>(list.size());
-        for(int i=0; i< list.size(); i++){
-            CalcPerList.add(list.get(i));
+        for (String aList : list) {
+            CalcPerList.add(aList);
         }
 
     }
@@ -110,12 +110,12 @@ public class Solution {
      * @return indexation coefficient, not null
      */
 
-    public BigDecimal solve (String basePer, String calcPeriod, Boolean method){
+    BigDecimal solve (String basePer, String calcPeriod, Boolean method){
         if(basePer == null || calcPeriod == null) {
             throw new IllegalArgumentException("Parameters are incorrect");
         }
         BigDecimal coefficient = BigDecimal.ONE;
-        BigDecimal limit = newLimit;
+        BigDecimal limit;
         BigDecimal bound = BigDecimal.ZERO;
         YearMonth base = YearMonth.parse(basePer);
         YearMonth calc = YearMonth.parse(calcPeriod);
@@ -175,24 +175,12 @@ public class Solution {
         return BasePerList;
     }
 
-    public void setBasePerList(List<String> basePerList) {
-        BasePerList = basePerList;
-    }
-
     List<String> getCalcPerList() {
         return CalcPerList;
     }
 
-    public void setCalcPerList(List<String> calcPerList) {
-        CalcPerList = calcPerList;
-    }
-
     BigDecimal getMinzp() {
         return minzp;
-    }
-
-    public void setMinzp(BigDecimal minzp) {
-        this.minzp = minzp;
     }
 
     private YearMonth getEndIndexesPeriod() {
@@ -205,10 +193,6 @@ public class Solution {
 
     private YearMonth getStartIndexesPeriod() {
         return startIndexesPeriod;
-    }
-
-    public void setStartIndexesPeriod(YearMonth startIndexesPeriod) {
-        this.startIndexesPeriod = startIndexesPeriod;
     }
 
     private static YearMonth getStartCalc() {

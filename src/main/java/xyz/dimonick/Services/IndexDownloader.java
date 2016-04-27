@@ -12,15 +12,14 @@ import java.time.YearMonth;
 import java.util.HashMap;
 
 
-public class IndexDownloader {
+class IndexDownloader {
 
-    private static String indexUrl = "http://index.minfin.com.ua/index/infl/";
-
-    public static HashMap<YearMonth, BigDecimal> getIdexes(){
-        Document doc = null;
+    static HashMap<YearMonth, BigDecimal> getIdexes(){
+        Document doc;
         HashMap<YearMonth, BigDecimal>  map = new HashMap<YearMonth, BigDecimal>() ;
         BigDecimal HUNDRED = new BigDecimal("100");
         try {
+            String indexUrl = "http://index.minfin.com.ua/index/infl/";
             doc = Jsoup.connect(indexUrl).get();
             Element tbody = doc.getElementsByTag("tbody").get(0);
             Elements rows = tbody.getElementsByTag("tr");

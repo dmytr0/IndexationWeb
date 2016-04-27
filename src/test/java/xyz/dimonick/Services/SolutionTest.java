@@ -9,7 +9,7 @@ import static org.junit.Assert.assertNotNull;
 
 public class SolutionTest {
 
-    Solution ic = Solution.getInstance();
+    private Solution ic = Solution.getInstance();
 
 
     @Test
