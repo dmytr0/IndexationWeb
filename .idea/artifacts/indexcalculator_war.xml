@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="indexcalculator:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="indexcalculator-2.2.war">
+      <element id="artifact" artifact-name="indexcalculator:war exploded" />
+    </root>
+  </artifact>
+</component>
