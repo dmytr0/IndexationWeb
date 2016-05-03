@@ -15,19 +15,9 @@
         <servlet-class>xyz.dimonick.Servlet.MainServlet</servlet-class>
     </servlet>
 
-    <servlet>
-        <servlet-name>redirect</servlet-name>
-        <servlet-class>xyz.dimonick.Servlet.RootPath</servlet-class>
-    </servlet>
-
     <servlet-mapping>
         <servlet-name>mainn</servlet-name>
         <url-pattern>/indexation</url-pattern>
-    </servlet-mapping>
-
-    <servlet-mapping>
-        <servlet-name>redirect</servlet-name>
-        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
 </web-app>

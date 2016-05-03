@@ -7,7 +7,6 @@ import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Timer;
 
 class Solution {
 
@@ -44,12 +43,12 @@ class Solution {
         init();
     }
 
-    void startIndexScheduler(){
-        long day = 86400000;
-        Timer time = new Timer();
-        DownloadScheduler ds = new DownloadScheduler();
-        time.schedule(ds, 0, day);
-    }
+//    void startIndexScheduler(){
+//        long day = 86400000;
+//        Timer time = new Timer();
+//        DownloadScheduler ds = new DownloadScheduler();
+//        time.schedule(ds, 0, day);
+//    }
 
 
     private void init(){
