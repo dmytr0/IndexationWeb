@@ -1,14 +1,14 @@
 package xyz.dimonick.Services;
 
 
-
+import com.google.appengine.repackaged.org.joda.time.YearMonth;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.time.YearMonth;
 import java.util.HashMap;
 
 
@@ -30,7 +30,7 @@ class IndexDownloader {
                     String currentIndex = column.get(j).text().replace(',', '.');
                     if (currentIndex.length() > 2){
                         BigDecimal index = new BigDecimal(currentIndex).divide(HUNDRED);
-                        map.put(YearMonth.of(year, (j+1)), index);
+                        map.put(new YearMonth(year, (j+1)), index);
                     }
                 }
             }
