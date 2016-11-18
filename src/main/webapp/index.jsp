@@ -97,6 +97,9 @@
             </br></br>
 
             <input class="edit" type="submit" value="Расчитать"/><br/>
+            <div>
+                <p>TEST!!!</p>
+            </div>
 
 
         </form>
@@ -117,9 +120,6 @@
                 </c:if>
             </div>
 
-            <div>
-                <p>TEST!!!</p>
-            </div>
 
 
         </div>
