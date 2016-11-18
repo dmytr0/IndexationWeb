@@ -1,7 +1,7 @@
 package xyz.dimonick.Services;
 
 
-import com.google.appengine.repackaged.org.joda.time.YearMonth;
+import org.joda.time.YearMonth;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -15,7 +15,6 @@ class Solution {
     private HashMap<YearMonth, BigDecimal> indexes;
     private List<String> BasePerList;
     private List<String> CalcPerList;
-    private BigDecimal minzp = new BigDecimal("1378");
     private YearMonth startIndexesPeriod = YearMonth.parse("2000-01");
     private YearMonth endIndexesPeriod;
     private static final YearMonth startCalc = YearMonth.parse("2016-01");
@@ -111,6 +110,7 @@ class Solution {
      */
 
     BigDecimal solve (String basePer, String calcPeriod, Boolean method){
+        init();
         if(basePer == null || calcPeriod == null) {
             throw new IllegalArgumentException("Parameters are incorrect");
         }
@@ -179,9 +179,6 @@ class Solution {
         return CalcPerList;
     }
 
-    BigDecimal getMinzp() {
-        return minzp;
-    }
 
     private YearMonth getEndIndexesPeriod() {
         return endIndexesPeriod;

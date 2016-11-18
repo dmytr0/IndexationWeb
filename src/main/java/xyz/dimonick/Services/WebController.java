@@ -1,6 +1,8 @@
 package xyz.dimonick.Services;
 
 
+import org.joda.time.YearMonth;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Collections;
@@ -21,14 +23,14 @@ public class WebController {
 
     public String getResNew(){
         BigDecimal coef = ic.solve(bp, cp, true);
-        BigDecimal indexation = ic.getMinzp().multiply(coef).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal indexation =MinSalary.getMinWages(YearMonth.parse(cp)).multiply(coef).setScale(2, RoundingMode.HALF_UP);
         resNew = "Коэффициент: " + coef + "\t Индексация: " + indexation + " грн.";
         return resNew;
     }
 
     public String getResOld(){
         BigDecimal coef = ic.solve(bp, cp, false);
-        BigDecimal indexation = ic.getMinzp().multiply(coef).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal indexation = MinSalary.getMinWages(YearMonth.parse(cp)).multiply(coef).setScale(2, RoundingMode.HALF_UP);
         resOld = "Коэффициент: " + coef + "\t Индексация: " + indexation + " грн.";
         return resOld;
     }

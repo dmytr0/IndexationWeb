@@ -8,6 +8,7 @@
     <title>Индексация зп</title>
     <link href="${pageContext.request.contextPath}/css/tooplate_style.css" rel="stylesheet" type="text/css" />
 
+
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.lightbox-0.5.js"></script>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/jquery.lightbox-0.5.css" media="screen" />
@@ -114,6 +115,10 @@
                         </h4>
 
                 </c:if>
+            </div>
+
+            <div>
+                <p>TEST!!!</p>
             </div>
 
 
