@@ -97,9 +97,7 @@
             </br></br>
 
             <input class="edit" type="submit" value="Расчитать"/><br/>
-            <div>
-                <p>TEST!!!</p>
-            </div>
+
 
 
         </form>
