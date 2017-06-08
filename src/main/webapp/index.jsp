@@ -95,10 +95,7 @@
 
 
             </br></br>
-
             <input class="edit" type="submit" value="Расчитать"/><br/>
-
-
 
         </form>
         </div>
@@ -107,7 +104,6 @@
 
 
 </div>
-
             <div class="content_title content_ct">
                 <c:if test="${param.bpselect ne null && param.cpselect ne null}">
                         <h4>
@@ -117,9 +113,6 @@
 
                 </c:if>
             </div>
-
-
-
         </div>
 
     </div> <!-- end of warpper -->
