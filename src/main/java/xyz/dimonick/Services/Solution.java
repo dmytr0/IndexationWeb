@@ -22,10 +22,6 @@ class Solution {
     private BigDecimal oldLimit = new BigDecimal("1.01");
 
 
-
-
-
-
     static Solution getInstance() {
         Solution localInstance = instance;
         if (localInstance == null) {
@@ -39,7 +35,7 @@ class Solution {
         return localInstance;
     }
 
-    private Solution(){
+    private Solution() {
         init();
     }
 
@@ -51,7 +47,7 @@ class Solution {
 //    }
 
 
-    private void init(){
+    private void init() {
         indexes = IndexDownloader.getIdexes();
         try {
             Thread.sleep(1000);
@@ -70,8 +66,7 @@ class Solution {
 
     //fill avalible base period
 
-    private void fillBasePeriod()
-    {
+    private void fillBasePeriod() {
         BasePerList = new ArrayList<String>(indexes.size());
         YearMonth tmpPeriod = getStartIndexesPeriod();
         for (int i = 0; i < indexes.size(); i++) {
@@ -86,12 +81,12 @@ class Solution {
     private void fillCalcPeriod() throws Exception {
         YearMonth tmpPeriod;
         YearMonth maxAvalible = getEndIndexesPeriod().plusMonths(2);
-        if (maxAvalible.compareTo(getStartCalc())<0) {
+        if (maxAvalible.compareTo(getStartCalc()) < 0) {
             throw new Exception("Not all indexes are loaded!");
         }
         tmpPeriod = getStartCalc();
         ArrayList<String> list = new ArrayList<String>();
-        while(tmpPeriod.compareTo(maxAvalible) <= 0) {
+        while (tmpPeriod.compareTo(maxAvalible) <= 0) {
             list.add(tmpPeriod.toString());
             tmpPeriod = tmpPeriod.plusMonths(1);
         }
@@ -103,15 +98,15 @@ class Solution {
     }
 
     /**
-     * @param basePer base period such as"2007-12", not null
+     * @param basePer    base period such as"2007-12", not null
      * @param calcPeriod pay period such as"2007-12", not null
-     * @param method true - 103% accept to all indexes, false - accept to all payroll from 01.2016
+     * @param method     true - 103% accept to all indexes, false - accept to all payroll from 01.2016
      * @return indexation coefficient, not null
      */
 
-    BigDecimal solve (String basePer, String calcPeriod, Boolean method){
+    BigDecimal solve(String basePer, String calcPeriod, Boolean method) {
         init();
-        if(basePer == null || calcPeriod == null) {
+        if (basePer == null || calcPeriod == null) {
             throw new IllegalArgumentException("Parameters are incorrect");
         }
         BigDecimal coefficient = BigDecimal.ONE;
@@ -121,46 +116,43 @@ class Solution {
         YearMonth calc = YearMonth.parse(calcPeriod);
         ArrayList<BigDecimal> excessLimit = new ArrayList<BigDecimal>();
 
-        if (base.compareTo(calc.minusMonths(2))>0) {
+        if (base.compareTo(calc.minusMonths(2)) > 0) {
             return BigDecimal.ZERO.setScale(3, RoundingMode.HALF_UP);
         }
-        for(YearMonth i = base.plusMonths(1); i.compareTo(calc.minusMonths(1))< 0; i = i.plusMonths(1) ){
+        for (YearMonth i = base.plusMonths(1); i.compareTo(calc.minusMonths(1)) < 0; i = i.plusMonths(1)) {
 
-            if(indexes.get(i)==null){
+            if (indexes.get(i) == null) {
                 return new BigDecimal("-1");
             }
 
-            if(bound.compareTo(BigDecimal.ZERO)> 0) {
+            if (bound.compareTo(BigDecimal.ZERO) > 0) {
                 bound = bound.multiply(indexes.get(i));
-            }
-            else bound = indexes.get(i);
+            } else bound = indexes.get(i);
 
 
-            if(!method && i.compareTo(startCalc) < 0){
+            if (!method && i.compareTo(startCalc) < 0) {
                 limit = oldLimit;
-            }
-            else {
+            } else {
                 limit = newLimit;
             }
-            if(bound.compareTo(limit)>=0) {
+            if (bound.compareTo(limit) >= 0) {
                 excessLimit.add(bound.setScale(3, RoundingMode.HALF_UP));
                 bound = BigDecimal.ZERO;
             }
         }
 
-        for(BigDecimal count: excessLimit) {
+        for (BigDecimal count : excessLimit) {
             coefficient = coefficient.multiply(count);
         }
 
         coefficient = coefficient.subtract(BigDecimal.ONE);
         if (coefficient.compareTo(BigDecimal.ZERO) < 0) {
-            coefficient = BigDecimal.ZERO ;
+            coefficient = BigDecimal.ZERO;
         }
         coefficient = coefficient.setScale(3, RoundingMode.HALF_UP);
 
         return coefficient;
     }
-
 
 
     public HashMap<YearMonth, BigDecimal> getIndexes() {

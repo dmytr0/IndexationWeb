@@ -12,7 +12,7 @@ import static org.junit.Assert.assertNotNull;
 public class IndexDownloaderTest {
 
     @Test
-    public void checkDownload(){
+    public void checkDownload() {
 
         Map<YearMonth, BigDecimal> map = IndexDownloader.getIdexes();
         assertNotNull(map);

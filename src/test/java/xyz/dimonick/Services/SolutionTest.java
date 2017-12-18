@@ -2,6 +2,7 @@ package xyz.dimonick.Services;
 
 
 import org.junit.Test;
+
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -13,7 +14,7 @@ public class SolutionTest {
 
 
     @Test
-    public void testPer(){
+    public void testPer() {
 
         List<String> listBase = ic.getBasePerList();
         List<String> listCalc = ic.getCalcPerList();
@@ -24,10 +25,10 @@ public class SolutionTest {
     }
 
     @Test
-    public void solveTest(){
+    public void solveTest() {
         String answer = ic.solve("2015-01", "2016-01", true).toString();
         assertEquals(answer, "0.371");
-        String answer2 =  ic.solve("2015-01", "2016-01", false).toString();
+        String answer2 = ic.solve("2015-01", "2016-01", false).toString();
         assertEquals(answer2, "0.380");
 
     }

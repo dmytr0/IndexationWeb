@@ -7,9 +7,7 @@ import org.junit.Test;
 import java.math.BigDecimal;
 import java.util.Map;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class MinSalaryTest {
     @Test
@@ -21,6 +19,7 @@ public class MinSalaryTest {
     @Test
     public void checkResult(){
         BigDecimal res = MinSalary.getMinWages(new YearMonth(2016, 5));
+        System.out.println(res);
         assertTrue(res.compareTo(new BigDecimal("1450"))==0);
         res = MinSalary.getMinWages(new YearMonth(2016, 4));
         assertTrue(res.compareTo(new BigDecimal("1378"))==0);

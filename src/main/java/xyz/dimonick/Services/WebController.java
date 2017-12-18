@@ -18,17 +18,17 @@ public class WebController {
 
     public WebController() {
 
-        ic =  Solution.getInstance();
+        ic = Solution.getInstance();
     }
 
-    public String getResNew(){
+    public String getResNew() {
         BigDecimal coef = ic.solve(bp, cp, true);
-        BigDecimal indexation =MinSalary.getMinWages(YearMonth.parse(cp)).multiply(coef).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal indexation = MinSalary.getMinWages(YearMonth.parse(cp)).multiply(coef).setScale(2, RoundingMode.HALF_UP);
         resNew = "Коэффициент: " + coef + "\t Индексация: " + indexation + " грн.";
         return resNew;
     }
 
-    public String getResOld(){
+    public String getResOld() {
         BigDecimal coef = ic.solve(bp, cp, false);
         BigDecimal indexation = MinSalary.getMinWages(YearMonth.parse(cp)).multiply(coef).setScale(2, RoundingMode.HALF_UP);
         resOld = "Коэффициент: " + coef + "\t Индексация: " + indexation + " грн.";
@@ -43,13 +43,13 @@ public class WebController {
         this.cp = cp;
     }
 
-    public List<String> getBase(){
+    public List<String> getBase() {
         List<String> arr = ic.getBasePerList();
         Collections.reverse(arr);
         return arr;
     }
 
-    public List<String> getCalc(){
+    public List<String> getCalc() {
         List<String> arr = ic.getCalcPerList();
         Collections.reverse(arr);
         return arr;
